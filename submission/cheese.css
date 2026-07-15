@@ -1,0 +1,163 @@
+/* Repo: https://github.com/<your-username>/<your-repo> -- replace with your actual repo link before submitting */
+
+/* @import pulls in our :root custom properties from a second file. A <link>
+   tag is still preferred in production over @import, because @import forces
+   the browser to fetch and parse that stylesheet before it can continue
+   loading the rest of this one (it blocks parallel downloading), while a
+   second <link> in the HTML lets the browser fetch both stylesheets at once. */
+@import url("variables.css");
+
+/* Global reset */
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/* Inherited typography, set once on body and inherited by everything below it */
+body {
+  font-family: var(--font-stack);
+  color: var(--color-primary);
+  line-height: 1.6;
+}
+
+main {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  /* % layout value: horizontal padding scales with the viewport */
+  padding: 1rem 5%;
+}
+
+header {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 1rem;
+  border-bottom: 2px solid var(--color-accent);
+}
+
+h1 {
+  /* rem font size: sized relative to the root, not the local context */
+  font-size: 2.5rem;
+  color: var(--color-primary);
+}
+
+h2 {
+  color: var(--color-accent);
+}
+
+/* Generated content: decorative marker not present in the HTML itself */
+section h2::before {
+  content: "🧀 ";
+}
+
+/* Descendant combinator: only <p> elements inside <header> */
+header p {
+  font-style: italic;
+}
+
+/* Child combinator: only <p> elements that are direct children of <article> */
+article > p {
+  font-weight: bold;
+}
+
+dl {
+  margin: 1rem 0;
+}
+
+dt {
+  font-weight: bold;
+  color: var(--color-accent);
+}
+
+/* Adjacent sibling combinator: a <dd> immediately following a <dt> */
+dt + dd {
+  margin: 0 0 1rem 1.5rem;
+}
+
+blockquote {
+  border-left: 4px solid var(--color-accent);
+  /* em padding: scales with this element's own font size, not the root */
+  padding: 0.5em 1em;
+  margin: 1rem 0;
+}
+
+blockquote footer {
+  margin-top: 0.5em;
+  font-style: italic;
+}
+
+/* ID selector, targeting the warning paragraph's id from Part 1 */
+#warning {
+  border: 1px solid var(--color-accent);
+  padding: 1em;
+}
+
+/* Attribute selector: elements whose lang attribute marks them as Latin.
+   Using [lang="la"] instead of a bare [lang] keeps this from also matching
+   the lang="en" on <html> -- font-style inherits, so a bare [lang] rule
+   would italicize the entire page. */
+[lang="la"] {
+  font-style: italic;
+}
+
+/* Class selector, styling the Latin-term class from Part 1 */
+.latin {
+  color: var(--color-accent);
+}
+
+form {
+  margin-top: 1rem;
+}
+
+fieldset {
+  border: 1px solid var(--color-accent);
+  padding: 1em;
+  margin-bottom: 1rem;
+}
+
+label {
+  margin-right: 1rem;
+}
+
+/* Attribute selector: text inputs specifically */
+input[type="text"] {
+  border: 1px solid var(--color-accent);
+  padding: 0.4em;
+  font-family: var(--font-stack);
+}
+
+button {
+  background: var(--color-accent);
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+}
+
+/* State pseudo-classes: hover on links */
+a:hover {
+  color: var(--color-accent);
+}
+
+/* State pseudo-classes: focus on interactive elements. We never set
+   outline: none anywhere, so the browser's default focus outline stays
+   intact; this rule just adds a visible color change on top of it. */
+input:focus,
+button:focus,
+a:focus {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* State pseudo-class :checked combined with the adjacent sibling combinator */
+input[type="checkbox"]:checked + label {
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+/* Scoped to the page-level footer only, so it doesn't also style the
+   <footer> nested inside <blockquote> for attribution. */
+body > footer {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}

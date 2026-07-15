@@ -1,0 +1,7 @@
+/* Custom properties live here so cheese.css can pull them in with @import. */
+:root {
+  --color-primary: #3b2a1a;
+  --color-accent: #a8632c;
+  --font-stack: Georgia, "Times New Roman", serif;
+  --content-width: 700px;
+}
